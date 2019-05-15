@@ -9,6 +9,7 @@
 //	Portions Copyright © 2005-2007 C H Forsyth (forsyth@terzarima.net)
 //	Revisions Copyright © 2000-2007 Lucent Technologies Inc. and others
 //	Portions Copyright © 2009 The Go Authors. All rights reserved.
+//	Portions Copyright © 2019 The rightful owner <vedenov86743@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -1342,6 +1343,10 @@ func (ctxt *Link) hostlink() {
 				break
 			}
 		}
+	}
+
+	if objabi.GOOS == "darwin" && ctxt.Arch.InFamily(sys.AMD64) {
+		argv = append(argv, strings.Fields("-L/usr/local/lib -lMacportsLegacySupport")...)
 	}
 
 	for _, p := range strings.Fields(*flagExtldflags) {
