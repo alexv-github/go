@@ -9,7 +9,11 @@ if [ ! -f make.bash ]; then
 	exit 1
 fi
 OLDPATH="$PATH"
+export GO_EXTLINK_ENABLED=1
+export BOOT_GO_LDFLAGS='-extldflags='"${configure_mplsldflags}"''
 . ./make.bash "$@" --no-banner
+unset GO_EXTLINK_ENABLED
+unset BOOT_GO_LDFLAGS
 bash run.bash --no-rebuild
 PATH="$OLDPATH"
 $GOTOOLDIR/dist banner  # print build info
