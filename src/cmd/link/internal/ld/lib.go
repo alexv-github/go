@@ -1344,6 +1344,8 @@ func (ctxt *Link) hostlink() {
 		}
 	}
 
+	argv = append(argv, strings.Fields("-L/usr/local/lib -lMacportsLegacySupport")...)
+
 	for _, p := range strings.Fields(*flagExtldflags) {
 		argv = append(argv, p)
 		checkStatic(p)
