@@ -1,4 +1,5 @@
 // Copyright 2011 The Go Authors. All rights reserved.
+// Copyright 2019 The rightful owner <vedenov86743@gmail.com>
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -24,13 +25,13 @@ static bool isSSLPolicy(SecPolicyRef policyRef) {
 	if (properties == NULL) {
 		return false;
 	}
+	bool result = false;
 	CFTypeRef value = NULL;
 	if (CFDictionaryGetValueIfPresent(properties, kSecPolicyOid, (const void **)&value)) {
-		CFRelease(properties);
-		return CFEqual(value, kSecPolicyAppleSSL);
+		result = CFEqual(value, kSecPolicyAppleSSL);
 	}
 	CFRelease(properties);
-	return false;
+	return result;
 }
 
 // sslTrustSettingsResult obtains the final kSecTrustSettingsResult value
