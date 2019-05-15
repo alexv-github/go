@@ -1344,7 +1344,9 @@ func (ctxt *Link) hostlink() {
 		}
 	}
 
-	argv = append(argv, strings.Fields("-L/usr/local/lib -lMacportsLegacySupport")...)
+	if objabi.GOOS == "darwin" && ctxt.Arch.InFamily(sys.AMD64) {
+		argv = append(argv, strings.Fields("-L/usr/local/lib -lMacportsLegacySupport")...)
+	}
 
 	for _, p := range strings.Fields(*flagExtldflags) {
 		argv = append(argv, p)
