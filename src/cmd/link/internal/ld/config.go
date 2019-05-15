@@ -251,6 +251,9 @@ func determineLinkMode(ctxt *Link) {
 				Exitf("external linking requested via GO_EXTLINK_ENABLED but not supported for %s/ppc64", objabi.GOOS)
 			}
 			ctxt.LinkMode = LinkExternal
+			if ! (objabi.GOOS == "darwin" && objabi.GOARCH == "amd64") {
+				ctxt.LinkMode = LinkInternal
+			}
 		default:
 			if needed, _ := mustLinkExternal(ctxt); needed {
 				ctxt.LinkMode = LinkExternal
