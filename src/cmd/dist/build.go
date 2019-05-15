@@ -190,6 +190,7 @@ func xinit() {
 	}
 
 	gogcflags = os.Getenv("BOOT_GO_GCFLAGS")
+	goldflags = os.Getenv("BOOT_GO_LDFLAGS")
 
 	cc, cxx := "gcc", "g++"
 	if defaultclang {
